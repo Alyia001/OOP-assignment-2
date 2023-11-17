@@ -68,12 +68,30 @@ class Potion:
         self.boost_attribute = boost_attribute
 
     def calculate_boost(self):
-        pass
+        return self.boost_attribute
+
 
 class Reagent:
     def __init__(self, name, potency):
         self.name = name
         self.potency = potency
 
+
+class Herb(Reagent):
     def refine(self):
-        pass
+        self.potency *= 2.5
+        print(f"Refined {self.name} with new potency: {self.potency}")
+
+
+class Catalyst(Reagent):
+    def __init__(self, name, potency, quality):
+        super().__init__(name, potency)
+        self.quality = quality
+
+    def refine(self):
+        if self.quality < 8.9:
+            self.quality += 1.1
+            print(f"Refined {self.name} with new quality: {self.quality}")
+        else:
+            self.quality = 10
+            print(f"{self.name} cannot be refined any further.")
