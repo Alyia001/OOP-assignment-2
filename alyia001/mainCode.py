@@ -41,14 +41,25 @@ class Laboratory:
         self.catalysts = []
 
     def mix_potion(self, ingredient1, ingredient2):
-        pass
+        if isinstance(ingredient1, (Herb, Catalyst)) and isinstance(ingredient2, (Herb, Catalyst)):
+            potion = Potion(name="Super Potion", stat_attribute="attack", boost_attribute=10)
+            self.potions.append(potion)
+            return potion
+        else:
+            print("Invalid ingredients for potion mixing.")
+            return None
 
     def add_reagent(self, reagent):
-        pass
+        if isinstance(reagent, Herb):
+            self.herbs.append(reagent)
+        elif isinstance(reagent, Catalyst):
+            self.catalysts.append(reagent)
 
     def refine_reagents(self):
-        pass
-
+        for herb in self.herbs:
+            herb.refine()
+        for catalyst in self.catalysts:
+            catalyst.refine()
 
 class Potion:
     def __init__(self, name, stat_attribute, boost_attribute):
